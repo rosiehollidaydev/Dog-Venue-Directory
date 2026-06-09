@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-charcoal: #41463D;
+    --color-lavender: #9D8DF1;
+    --color-ice-blue: #B8CDF8;
+    --color-mint: #95F2D9;
+    --color-neon-mint: #1CFEBA;
+  }
+
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-white text-charcoal font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lavender text-white font-medium text-sm transition-all hover:bg-opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-lavender focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-charcoal text-white font-medium text-sm transition-all hover:bg-opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-charcoal focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-charcoal font-medium text-sm transition-all hover:bg-gray-100 active:scale-95 focus:outline-none;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white font-medium text-sm transition-all hover:bg-red-700 active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-shadow hover:shadow-md;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-mint {
+    @apply badge bg-mint/20 text-emerald-700;
+  }
+
+  .badge-lavender {
+    @apply badge bg-lavender/20 text-purple-700;
+  }
+
+  .badge-ice {
+    @apply badge bg-ice-blue/20 text-blue-700;
+  }
+
+  .badge-charcoal {
+    @apply badge bg-charcoal/10 text-charcoal;
+  }
+
+  .form-input {
+    @apply block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-charcoal placeholder-gray-400 focus:border-lavender focus:outline-none focus:ring-1 focus:ring-lavender transition-colors;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-charcoal mb-1;
+  }
+
+  .amenity-tag {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-mint/15 text-emerald-700 text-sm font-medium;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold text-charcoal;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Smooth scrollbar */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #9D8DF1;
+  border-radius: 3px;
+}

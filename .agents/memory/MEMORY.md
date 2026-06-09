@@ -1,0 +1,5 @@
+- [Next.js + iron-session middleware](nextjs-iron-session-middleware.md) — middleware.ts cannot import from session.ts; inline options directly
+- [Prisma in pnpm workspace](prisma-pnpm-workspace.md) — approve-builds required after install; use npx prisma generate as fallback
+- [Package firewall version blocks](package-firewall.md) — packages <1440 mins old get 403; pin to established versions
+- [Artifact registration workaround](artifact-registration.md) — createArtifact fails on existing dirs; write artifact.toml via bash + configureWorkflow manually
+- [Next.js 15 config changes](nextjs15-config.md) — serverActions moved from experimental to top level; React 19 required

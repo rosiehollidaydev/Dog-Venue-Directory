@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model City {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  metaTitle   String?
+  metaDesc    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  areas       Area[]
+  venues      Venue[]
+}
+
+model Area {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  cityId    String
+  city      City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  venues    Venue[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  icon        String?
+  venues      Venue[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Amenity {
+  id     String         @id @default(cuid())
+  name   String         @unique
+  slug   String         @unique
+  icon   String?
+  venues VenueAmenity[]
+}
+
+model Venue {
+  id                 String         @id @default(cuid())
+  name               String
+  slug               String         @unique
+  address            String
+  description        String         @db.Text
+  website            String?
+  affiliateUrl       String?
+  bookingUrl         String?
+  phone              String?
+  image              String?
+  gallery            String[]       @default([])
+  dogsInside         Boolean        @default(false)
+  waterBowls         Boolean        @default(false)
+  dogTreats          Boolean        @default(false)
+  outdoorSeating     Boolean        @default(false)
+  dogMenu            Boolean        @default(false)
+  overnightStays     Boolean        @default(false)
+  featured           Boolean        @default(false)
+  verified           Boolean        @default(false)
+  verificationStatus String         @default("unverified")
+  lastVerifiedAt     DateTime?
+  sourceUrl          String?
+  metaTitle          String?
+  metaDescription    String?
+  cityId             String
+  city               City           @relation(fields: [cityId], references: [id])
+  areaId             String?
+  area               Area?          @relation(fields: [areaId], references: [id])
+  categoryId         String
+  category           Category       @relation(fields: [categoryId], references: [id])
+  amenities          VenueAmenity[]
+  reviews            Review[]
+  claimRequests      ClaimRequest[]
+  affiliateLinks     AffiliateLink[]
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  @@index([cityId])
+  @@index([areaId])
+  @@index([categoryId])
+  @@index([featured])
+  @@index([verified])
+}
+
+model VenueAmenity {
+  venueId   String
+  amenityId String
+  venue     Venue   @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  amenity   Amenity @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@id([venueId, amenityId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  venueId   String
+  venue     Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  author    String
+  email     String
+  rating    Int
+  content   String   @db.Text
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model ClaimRequest {
+  id        String   @id @default(cuid())
+  venueId   String
+  venue     Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  name      String
+  email     String
+  phone     String?
+  message   String?  @db.Text
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+}
+
+model AffiliateLink {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  venueId   String?
+  venue     Venue?   @relation(fields: [venueId], references: [id])
+  cityId    String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+}
