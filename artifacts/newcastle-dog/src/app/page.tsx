@@ -42,10 +42,11 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-charcoal text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10"
+      <section className="relative text-white overflow-hidden" style={{ background: "linear-gradient(135deg, #0A0518 0%, #160B3D 30%, #27126B 65%, #4A2BAA 100%)" }}>
+        <div className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, #9D8DF1 0%, transparent 50%), radial-gradient(circle at 80% 20%, #95F2D9 0%, transparent 40%), radial-gradient(circle at 60% 80%, #B8CDF8 0%, transparent 40%)`,
+            backgroundImage: `radial-gradient(ellipse at 10% 60%, #9D8DF1 0%, transparent 45%), radial-gradient(ellipse at 90% 10%, #1CFEBA 0%, transparent 35%), radial-gradient(ellipse at 70% 90%, #B8CDF8 0%, transparent 40%)`,
+            opacity: 0.25,
           }}
         />
         <div className="page-container py-20 md:py-28 relative">
@@ -96,19 +97,19 @@ export default async function HomePage() {
       </section>
 
       {/* Categories */}
-      <section className="py-14 bg-gray-50">
+      <section className="py-14 bg-purple-soft dark:bg-purple-night">
         <div className="page-container">
           <div className="flex items-center justify-between mb-8">
             <h2 className="section-title">Browse by category</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {categories.map((cat) => {
-              const config = categoryConfig[cat.slug] || { icon: "🐾", color: "bg-lavender/10 border-lavender/30 text-lavender", href: `/venues?category=${cat.slug}` };
+              const config = categoryConfig[cat.slug] || { icon: "🐾", color: "bg-lavender/10 border-lavender/30 text-purple-rich", href: `/venues?category=${cat.slug}` };
               return (
                 <Link
                   key={cat.id}
                   href={config.href}
-                  className={`flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all hover:shadow-md hover:-translate-y-0.5 ${config.color}`}
+                  className={`flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all hover:shadow-lg hover:shadow-lavender/20 hover:-translate-y-1 dark:bg-purple-deep/60 dark:border-purple-mid/40 dark:text-purple-pale ${config.color}`}
                 >
                   <span className="text-4xl">{config.icon}</span>
                   <span className="font-semibold text-sm">{cat.name}</span>
@@ -121,12 +122,12 @@ export default async function HomePage() {
 
       {/* Featured venues */}
       {featuredVenues.length > 0 && (
-        <section className="py-14">
+        <section className="py-14 bg-white dark:bg-purple-deep/40">
           <div className="page-container">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <h2 className="section-title">Featured venues</h2>
-                <p className="text-gray-500 text-sm mt-1">Hand-picked dog-friendly favourites</p>
+                <p className="text-gray-500 dark:text-purple-pale/60 text-sm mt-1">Hand-picked dog-friendly favourites</p>
               </div>
               <Link href="/venues?featured=true" className="text-lavender hover:text-lavender/80 text-sm font-medium flex items-center gap-1">
                 View all <ArrowRight size={14} />
@@ -142,7 +143,7 @@ export default async function HomePage() {
       )}
 
       {/* Areas */}
-      <section className="py-14 bg-charcoal text-white">
+      <section className="py-14 text-white" style={{ background: "linear-gradient(135deg, #160B3D 0%, #27126B 50%, #4A2BAA 100%)" }}>
         <div className="page-container">
           <h2 className="text-2xl font-bold mb-2">Explore by area</h2>
           <p className="text-white/60 text-sm mb-8">Find dog-friendly spots in your neighbourhood</p>
@@ -151,15 +152,15 @@ export default async function HomePage() {
               <Link
                 key={area.id}
                 href={`/areas/${area.slug}`}
-                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm transition-colors border border-white/10"
+                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm transition-colors border border-lavender/30 hover:border-lavender/60"
               >
-                <MapPin size={14} className="text-neon-mint" />
+                <MapPin size={14} className="text-lavender" />
                 {area.name}
               </Link>
             ))}
             <Link
               href="/venues"
-              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-neon-mint/20 hover:bg-neon-mint/30 text-neon-mint font-medium text-sm transition-colors border border-neon-mint/30"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-lavender hover:opacity-90 text-white font-semibold text-sm transition-opacity"
             >
               View all areas <ArrowRight size={14} />
             </Link>
@@ -168,12 +169,12 @@ export default async function HomePage() {
       </section>
 
       {/* Recent venues */}
-      <section className="py-14">
+      <section className="py-14 bg-purple-soft dark:bg-purple-night">
         <div className="page-container">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="section-title">Recently added</h2>
-              <p className="text-gray-500 text-sm mt-1">New dog-friendly spots in Newcastle</p>
+              <p className="text-purple-mid/70 dark:text-purple-pale/60 text-sm mt-1">New dog-friendly spots in Newcastle</p>
             </div>
             <Link href="/venues" className="text-lavender hover:text-lavender/80 text-sm font-medium flex items-center gap-1">
               View all <ArrowRight size={14} />
@@ -188,16 +189,21 @@ export default async function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-14 bg-gradient-to-br from-lavender/10 to-ice-blue/10">
-        <div className="page-container text-center">
-          <h2 className="text-3xl font-bold text-charcoal mb-4">
+      <section className="py-20 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg, #27126B 0%, #9D8DF1 100%)" }}>
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse at 80% 50%, #1CFEBA 0%, transparent 40%)", opacity: 0.12 }} />
+        <div className="page-container text-center relative">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 text-white/80 text-sm font-medium mb-6">
+            🐾 Join the community
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-4">
             Know a great dog-friendly spot?
           </h2>
-          <p className="text-gray-600 mb-8 max-w-xl mx-auto">
+          <p className="text-white/70 mb-8 max-w-xl mx-auto text-lg">
             Help other dog owners find amazing venues across Newcastle. Share your favourite dog-friendly place with the community.
           </p>
-          <Link href="/venues" className="btn-primary text-base px-8 py-4 rounded-xl">
+          <Link href="/venues" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-purple-rich font-bold text-base hover:opacity-95 transition-opacity">
             Browse All Venues
+            <ArrowRight size={18} />
           </Link>
         </div>
       </section>

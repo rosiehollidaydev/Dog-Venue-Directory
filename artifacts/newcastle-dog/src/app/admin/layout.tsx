@@ -11,7 +11,7 @@ export default async function AdminLayout({
 
   // Allow login page without auth
   return (
-    <div className="flex bg-gray-50 min-h-screen">
+    <div className="flex bg-gray-50 dark:bg-purple-night min-h-screen">
       {session.isLoggedIn && <AdminSidebar />}
       <div className="flex-1 overflow-auto">
         {children}

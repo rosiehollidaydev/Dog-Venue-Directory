@@ -43,7 +43,7 @@ export default function VenueCard({ venue, className }: VenueCardProps) {
   return (
     <Link href={`/venues/${venue.slug}`} className={cn("card group block", className)}>
       {/* Image */}
-      <div className="relative h-48 bg-gradient-to-br from-lavender/20 to-ice-blue/20 overflow-hidden">
+      <div className="relative h-48 bg-gradient-to-br from-lavender/20 to-ice-blue/20 dark:from-purple-mid/30 dark:to-purple-deep overflow-hidden">
         {venue.image ? (
           <Image
             src={venue.image}
@@ -82,18 +82,18 @@ export default function VenueCard({ venue, className }: VenueCardProps) {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="font-semibold text-charcoal text-base mb-1 group-hover:text-lavender transition-colors line-clamp-1">
+        <h3 className="font-semibold text-charcoal dark:text-purple-soft text-base mb-1 group-hover:text-lavender transition-colors line-clamp-1">
           {venue.name}
         </h3>
 
-        <div className="flex items-center gap-1 text-gray-500 text-xs mb-2">
+        <div className="flex items-center gap-1 text-gray-500 dark:text-purple-pale/60 text-xs mb-2">
           <MapPin size={12} className="shrink-0" />
           <span className="truncate">
             {venue.area ? `${venue.area.name}, ` : ""}{venue.city.name}
           </span>
         </div>
 
-        <p className="text-gray-600 text-sm line-clamp-2 mb-3">
+        <p className="text-gray-600 dark:text-purple-pale/70 text-sm line-clamp-2 mb-3">
           {venue.description}
         </p>
 

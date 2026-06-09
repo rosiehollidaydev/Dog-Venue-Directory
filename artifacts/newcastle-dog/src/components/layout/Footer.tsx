@@ -18,7 +18,7 @@ const areas = [
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal text-white mt-20">
+    <footer className="bg-purple-night text-white mt-20" style={{ background: "linear-gradient(135deg, #0A0518 0%, #160B3D 100%)" }}>
       <div className="page-container py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
@@ -27,7 +27,7 @@ export default function Footer() {
               <span className="text-2xl">🐾</span>
               <div className="leading-none">
                 <span className="font-bold text-white text-lg">Newcastle</span>
-                <span className="font-bold text-neon-mint text-lg">.dog</span>
+                <span className="font-bold text-lavender text-lg">.dog</span>
               </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">

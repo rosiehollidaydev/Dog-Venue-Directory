@@ -14,11 +14,15 @@
   }
 
   * {
-    @apply border-gray-200;
+    @apply border-gray-200 dark:border-purple-mid/20;
   }
 
   body {
-    @apply bg-white text-charcoal font-sans antialiased;
+    @apply bg-purple-soft text-charcoal font-sans antialiased;
+  }
+
+  .dark body {
+    @apply bg-purple-night text-purple-soft;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -28,15 +32,15 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lavender text-white font-medium text-sm transition-all hover:bg-opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-lavender focus:ring-offset-2;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lavender text-white font-medium text-sm transition-all hover:opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-lavender focus:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-charcoal text-white font-medium text-sm transition-all hover:bg-opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-charcoal focus:ring-offset-2;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-purple-rich text-white font-medium text-sm transition-all hover:opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-mid focus:ring-offset-2;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-charcoal font-medium text-sm transition-all hover:bg-gray-100 active:scale-95 focus:outline-none;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-purple-rich dark:text-purple-pale font-medium text-sm transition-all hover:bg-purple-pale dark:hover:bg-white/10 active:scale-95 focus:outline-none;
   }
 
   .btn-danger {
@@ -44,7 +48,7 @@
   }
 
   .card {
-    @apply bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-shadow hover:shadow-md;
+    @apply bg-white dark:bg-purple-deep rounded-2xl border border-purple-pale dark:border-purple-mid/30 shadow-sm overflow-hidden transition-shadow hover:shadow-md hover:shadow-lavender/10 dark:hover:shadow-lavender/20;
   }
 
   .badge {
@@ -52,35 +56,35 @@
   }
 
   .badge-mint {
-    @apply badge bg-mint/20 text-emerald-700;
+    @apply badge bg-mint/20 text-emerald-700 dark:text-emerald-300;
   }
 
   .badge-lavender {
-    @apply badge bg-lavender/20 text-purple-700;
+    @apply badge bg-lavender/20 text-purple-700 dark:text-lavender;
   }
 
   .badge-ice {
-    @apply badge bg-ice-blue/20 text-blue-700;
+    @apply badge bg-ice-blue/20 text-blue-700 dark:text-blue-300;
   }
 
   .badge-charcoal {
-    @apply badge bg-charcoal/10 text-charcoal;
+    @apply badge bg-charcoal/10 text-charcoal dark:bg-white/10 dark:text-white;
   }
 
   .form-input {
-    @apply block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-charcoal placeholder-gray-400 focus:border-lavender focus:outline-none focus:ring-1 focus:ring-lavender transition-colors;
+    @apply block w-full rounded-lg border border-purple-pale dark:border-purple-mid/40 px-3 py-2.5 text-sm text-charcoal dark:text-purple-soft placeholder-gray-400 dark:placeholder-purple-pale/40 focus:border-lavender focus:outline-none focus:ring-1 focus:ring-lavender transition-colors bg-white dark:bg-purple-deep/80;
   }
 
   .form-label {
-    @apply block text-sm font-medium text-charcoal mb-1;
+    @apply block text-sm font-medium text-charcoal dark:text-purple-pale mb-1;
   }
 
   .amenity-tag {
-    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-mint/15 text-emerald-700 text-sm font-medium;
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-lavender/10 dark:bg-lavender/20 text-purple-700 dark:text-lavender text-sm font-medium;
   }
 
   .section-title {
-    @apply text-2xl font-bold text-charcoal;
+    @apply text-2xl font-bold text-purple-deep dark:text-purple-soft;
   }
 
   .page-container {
@@ -88,17 +92,18 @@
   }
 }
 
-/* Smooth scrollbar */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #EDE9FE;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0A0518;
 }
 ::-webkit-scrollbar-thumb {
   background: #9D8DF1;

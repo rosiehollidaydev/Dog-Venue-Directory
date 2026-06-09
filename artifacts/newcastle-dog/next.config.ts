@@ -6,8 +6,11 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**" },
     ],
   },
-  serverActions: {
-    allowedOrigins: ["*"],
+  allowedDevOrigins: ["*"],
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["*"],
+    },
   },
 };
 
