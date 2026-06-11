@@ -7,7 +7,7 @@ interface Area { id: string; name: string; cityId: string }
 interface Category { id: string; name: string }
 
 interface VenueFormProps {
-  action: (formData: FormData) => void | Promise<void>;
+  action: (formData: FormData) => Promise<unknown>;
   cities: City[];
   areas: Area[];
   categories: Category[];
@@ -63,8 +63,13 @@ export default function VenueForm({
       .trim();
   };
 
+  // Wrap to satisfy React's form action type (void) while keeping broad interface
+  const formAction = async (formData: FormData): Promise<void> => {
+    await action(formData);
+  };
+
   return (
-    <form action={action} className="space-y-8">
+    <form action={formAction} className="space-y-8">
       {/* Basic info */}
       <div className="card p-6">
         <h2 className="font-semibold text-charcoal mb-5">Basic Information</h2>

@@ -1,0 +1,32 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies (re-installed inside Docker)
+node_modules/
+artifacts/*/node_modules/
+lib/*/node_modules/
+scripts/node_modules/
+
+# Build output (re-built inside Docker)
+artifacts/*/.next/
+artifacts/*/dist/
+lib/*/dist/
+
+# Dev / editor files
+.local/
+.env*
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Test artifacts
+coverage/
+*.test.ts
+*.spec.ts
+
+# Replit-specific
+.replit
+replit.nix
+.upm/

@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: newcastle-dog-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: newcastle_dog
+      POSTGRES_USER: newcastle_dog
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U newcastle_dog -d newcastle_dog"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - newcastle-dog
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newcastle-dog-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      DATABASE_URL: postgresql://newcastle_dog:${POSTGRES_PASSWORD}@postgres:5432/newcastle_dog
+      SESSION_SECRET: ${SESSION_SECRET:?SESSION_SECRET is required}
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - newcastle-dog
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  newcastle-dog:
+    driver: bridge
