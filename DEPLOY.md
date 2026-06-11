@@ -9,34 +9,27 @@
 
 ## 1. Build & run locally with Docker Compose
 
-### 1a. Create your environment file
-
-Copy the example and fill in real values:
+### 1a. Quick start (no configuration needed for development)
 
 ```bash
-cp .env.example .env
+git clone <repo-url>
+cd <repo>
+docker compose up --build -d
 ```
 
-`.env` contents (create this file):
+The `docker-compose.yml` ships with safe dev defaults so it works immediately after a clone with no manual steps.
 
-```env
-# Required — must be at least 32 random characters
-SESSION_SECRET=change-me-to-a-long-random-secret-string-32chars
+### 1b. Harden for production (recommended)
 
-# Required — choose a strong password for the Postgres database
-POSTGRES_PASSWORD=change-me-strong-db-password
+Create a `.env` file to override the weak defaults:
 
-# Optional — host port to expose the app on (default: 3000)
-APP_PORT=3000
+```bash
+echo "SESSION_SECRET=$(openssl rand -hex 32)" >> .env
+echo "POSTGRES_PASSWORD=$(openssl rand -hex 32)" >> .env
+echo "APP_PORT=3000" >> .env
 ```
 
 > **Never commit `.env` to version control.** It is already in `.gitignore`.
-
-### 1b. Build and start
-
-```bash
-docker compose up --build -d
-```
 
 The first build takes ~3 minutes. Subsequent builds use the layer cache and are much faster.
 

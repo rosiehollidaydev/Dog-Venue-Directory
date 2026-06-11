@@ -6,7 +6,9 @@ services:
     environment:
       POSTGRES_DB: newcastle_dog
       POSTGRES_USER: newcastle_dog
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      # Default is intentionally weak — override via .env for production:
+      #   echo "POSTGRES_PASSWORD=$(openssl rand -hex 32)" >> .env
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -26,8 +28,10 @@ services:
     ports:
       - "${APP_PORT:-3000}:3000"
     environment:
-      DATABASE_URL: postgresql://newcastle_dog:${POSTGRES_PASSWORD}@postgres:5432/newcastle_dog
-      SESSION_SECRET: ${SESSION_SECRET:?SESSION_SECRET is required}
+      DATABASE_URL: postgresql://newcastle_dog:${POSTGRES_PASSWORD:-devpassword}@postgres:5432/newcastle_dog
+      # Default is intentionally weak — override via .env for production:
+      #   echo "SESSION_SECRET=$(openssl rand -hex 32)" >> .env
+      SESSION_SECRET: ${SESSION_SECRET:-devonly-default-secret-not-for-production!}
       NODE_ENV: production
       PORT: 3000
       HOSTNAME: 0.0.0.0
