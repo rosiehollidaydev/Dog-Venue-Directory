@@ -74,7 +74,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/hotels": {
+    "/pubs": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -87,8 +87,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/hotels",
-      "dataRoute": "/hotels.rsc",
+      "srcRoute": "/pubs",
+      "dataRoute": "/pubs.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -122,7 +122,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/pubs": {
+    "/hotels": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -135,8 +135,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/pubs",
-      "dataRoute": "/pubs.rsc",
+      "srcRoute": "/hotels",
+      "dataRoute": "/hotels.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
