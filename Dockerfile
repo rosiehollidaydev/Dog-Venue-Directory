@@ -5,10 +5,10 @@
 # ============================================================
 
 # ---- base ----
-FROM node:20-slim AS base
+FROM node:22-bookworm-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN corepack enable \  && corepack prepare pnpm@10.23.0 --activate
 
 # ---- deps: install workspace dependencies ----
 FROM base AS deps
@@ -29,7 +29,7 @@ COPY lib/db/package.json                  ./lib/db/
 COPY scripts/package.json                 ./scripts/
 
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
-    pnpm install --frozen-lockfile
+    pnpm install --no-frozen-lockfile
 
 # ---- builder: compile the app ----
 FROM base AS builder
@@ -54,14 +54,14 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY artifacts/newcastle-dog/ ./artifacts/newcastle-dog/
 
 # Generate Prisma client (schema-only, no DB connection required)
-RUN cd artifacts/newcastle-dog && npx prisma generate
+RUN pnpm --filter @workspace/newcastle-dog db:generate
 
 # Build Next.js (no DB connection needed — all public pages with
 # Prisma queries are marked force-dynamic)
 RUN pnpm --filter @workspace/newcastle-dog run build
 
 # ---- runner: minimal production image ----
-FROM node:20-slim AS runner
+FROM node:22-bookworm-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
